@@ -1,7 +1,7 @@
 SelectableMapFragment
 =====================
 
-SelectableMapFragment is a subclass of SupportMapFragment with a draggable overlay box for selecting a region of interest.
+SelectableMapFragment is a subclass of SupportMapFragment with a draggable overlay box for selecting a region of interest.  It is intended to be used with the Google Maps Android API v2.
 
 ## Sample
 
