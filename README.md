@@ -5,7 +5,7 @@ SelectableMapFragment is a subclass of SupportMapFragment with a draggable overl
 
 ## Sample
 
-See the [sample](https://github.com/mattlogan/CircleMenu/tree/master/sample) for an example of how to use this library.
+See the [sample](https://github.com/mattlogan/SelectableMapFragment/tree/master/sample) for an example of how to use this library.
 
 More documentation to follow.
 
