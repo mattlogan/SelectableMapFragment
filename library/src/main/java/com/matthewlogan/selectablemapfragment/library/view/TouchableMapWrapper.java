@@ -8,11 +8,11 @@ import android.widget.FrameLayout;
  * Created by matthewlogan on 5/20/14.
  */
 
-public class TouchableWrapper extends FrameLayout {
+public class TouchableMapWrapper extends FrameLayout {
 
     private OnMapTouchListener mListener;
 
-    public TouchableWrapper(Context context) {
+    public TouchableMapWrapper(Context context) {
         super(context);
     }
 

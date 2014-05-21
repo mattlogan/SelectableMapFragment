@@ -21,10 +21,12 @@ import com.matthewlogan.selectablemapfragment.library.util.OverlayUtils;
  */
 
 public class SelectableMapFragment extends SupportMapFragment
-        implements TouchableWrapper.OnMapTouchListener, GoogleMap.OnMapClickListener {
+        implements TouchableMapWrapper.OnMapTouchListener, GoogleMap.OnMapClickListener {
 
     private View mContentView;
     private GoogleMap mGoogleMap;
+
+    private GroundOverlayOptions mDraggableOverlayBoxOptions;
     private GroundOverlay mDraggableOverlayBox;
 
     // Starting size for map creation
@@ -44,11 +46,11 @@ public class SelectableMapFragment extends SupportMapFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         mContentView = super.onCreateView(inflater, parent, savedInstanceState);
 
-        TouchableWrapper touchableWrapper = new TouchableWrapper(getActivity());
-        touchableWrapper.addView(mContentView);
-        touchableWrapper.setOnMapTouchListener(this);
+        TouchableMapWrapper touchableMapWrapper = new TouchableMapWrapper(getActivity());
+        touchableMapWrapper.addView(mContentView);
+        touchableMapWrapper.setOnMapTouchListener(this);
 
-        return touchableWrapper;
+        return touchableMapWrapper;
     }
 
     @Override
@@ -66,19 +68,6 @@ public class SelectableMapFragment extends SupportMapFragment
     @Override
     public View getView() {
         return mContentView;
-    }
-
-    private void showSelectionBox() {
-        Bitmap bm = OverlayUtils.makeSquareOverlayBitmap(getActivity());
-
-        LatLng startPosition = mGoogleMap.getCameraPosition().target;
-
-        GroundOverlayOptions goo = new GroundOverlayOptions()
-                .image(BitmapDescriptorFactory.fromBitmap(bm))
-                .zIndex(1)
-                .position(startPosition, sBaseOverlaySquareSize);
-
-        mDraggableOverlayBox = mGoogleMap.addGroundOverlay(goo);
     }
 
     @Override
@@ -105,5 +94,19 @@ public class SelectableMapFragment extends SupportMapFragment
 
     public void setOnOverlayDragListener(OnOverlayDragListener listener) {
         mListener = listener;
+    }
+
+    private void showSelectionBox() {
+        if (mDraggableOverlayBoxOptions == null) {
+            Bitmap bm = OverlayUtils.makeSquareOverlayBitmap(getActivity());
+            LatLng startPosition = mGoogleMap.getCameraPosition().target;
+
+            mDraggableOverlayBoxOptions = new GroundOverlayOptions()
+                    .image(BitmapDescriptorFactory.fromBitmap(bm))
+                    .zIndex(1)
+                    .position(startPosition, sBaseOverlaySquareSize);
+        }
+
+        mDraggableOverlayBox = mGoogleMap.addGroundOverlay(mDraggableOverlayBoxOptions);
     }
 }
