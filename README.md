@@ -1,7 +1,7 @@
 SelectableMapFragment
 =====================
 
-SelectableMapFragment is SupportMapFragment subclass with draggable overlay box for selecting a region of interest.
+SelectableMapFragment is a subclass of SupportMapFragment with a draggable overlay box for selecting a region of interest.
 
 ## Sample
 
