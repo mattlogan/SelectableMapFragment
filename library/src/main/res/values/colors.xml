@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="square_overlay_border">#8D2342</color>
+    <color name="square_overlay">#80FFFFFF</color>
+</resources>

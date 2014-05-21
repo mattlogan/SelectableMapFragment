@@ -1,0 +1,5 @@
+<resources>
+
+    <dimen name="max_overlay_square_size">320dp</dimen>
+
+</resources>
