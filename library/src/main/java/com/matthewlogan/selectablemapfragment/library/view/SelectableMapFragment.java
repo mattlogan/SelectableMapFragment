@@ -23,16 +23,17 @@ import com.matthewlogan.selectablemapfragment.library.util.OverlayUtils;
 public class SelectableMapFragment extends SupportMapFragment
         implements TouchableMapWrapper.OnMapTouchListener, GoogleMap.OnMapClickListener {
 
+    public static final float sBaseOverlaySquareSize = 10000;
+
     private View mContentView;
     private GoogleMap mGoogleMap;
 
     private GroundOverlayOptions mDraggableOverlayBoxOptions;
     private GroundOverlay mDraggableOverlayBox;
 
-    // Starting size for map creation
-    public static final float sBaseOverlaySquareSize = 10000;
-
     private OnOverlayDragListener mListener;
+
+    private boolean mIsDraggingBox;
 
     public interface OnOverlayDragListener {
         public void onOverlayDrag(LatLngBounds latLngBounds);
@@ -72,15 +73,52 @@ public class SelectableMapFragment extends SupportMapFragment
 
     @Override
     public void onMapTouch(MotionEvent event) {
-        LatLng ll = OverlayUtils.convertPointToLatLng(getView().getWidth(),
-                getView().getHeight(), event.getX(),
-                getView().getHeight() - event.getY(), mGoogleMap);
 
-        if (event.getPointerCount() == 1
-                && OverlayUtils.isPointContainedInOverlay(mDraggableOverlayBox, ll)) {
-            mDraggableOverlayBox.setPosition(ll);
-            mListener.onOverlayDrag(mDraggableOverlayBox.getBounds());
-            mGoogleMap.getUiSettings().setScrollGesturesEnabled(Boolean.FALSE);
+        if (event.getPointerCount() == 1) {
+
+            final int w = getView().getWidth();
+            final int h = getView().getHeight();
+
+            LatLng touchPoint = OverlayUtils.convertPointToLatLng(w, h,
+                    event.getX(), h - event.getY(), mGoogleMap);
+
+            switch (event.getActionMasked()) {
+
+                case MotionEvent.ACTION_DOWN:
+                    if (OverlayUtils.isPointContainedInOverlay(mDraggableOverlayBox, touchPoint)) {
+                        mIsDraggingBox = true;
+                        mGoogleMap.getUiSettings().setScrollGesturesEnabled(Boolean.FALSE);
+                    }
+                    break;
+
+                case MotionEvent.ACTION_MOVE:
+                    if (mIsDraggingBox && event.getHistorySize() > 0) {
+                        LatLng lastTouchPoint = OverlayUtils.convertPointToLatLng(w, h,
+                                event.getHistoricalX(0), h - event.getHistoricalY(0),
+                                mGoogleMap);
+
+                        LatLng oldPos = mDraggableOverlayBox.getPosition();
+
+                        double diffLat = touchPoint.latitude - lastTouchPoint.latitude;
+                        double diffLng = touchPoint.longitude - lastTouchPoint.longitude;
+
+                        mDraggableOverlayBox.setPosition(new LatLng(
+                                oldPos.latitude + diffLat,
+                                oldPos.longitude + diffLng));
+
+                        mListener.onOverlayDrag(mDraggableOverlayBox.getBounds());
+                    }
+                    break;
+
+                case MotionEvent.ACTION_UP:
+                    mIsDraggingBox = false;
+                    mGoogleMap.getUiSettings().setScrollGesturesEnabled(Boolean.TRUE);
+                    break;
+
+                default:
+                    break;
+            }
+
         } else {
             mGoogleMap.getUiSettings().setScrollGesturesEnabled(Boolean.TRUE);
         }
