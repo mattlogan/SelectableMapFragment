@@ -35,6 +35,9 @@ public class SelectableMapFragment extends SupportMapFragment
 
     private boolean mIsDraggingBox;
 
+    private float mLastX;
+    private float mLastY;
+
     public interface OnOverlayDragListener {
         public void onOverlayDrag(LatLngBounds latLngBounds);
     }
@@ -88,14 +91,15 @@ public class SelectableMapFragment extends SupportMapFragment
                     if (OverlayUtils.isPointContainedInOverlay(mDraggableOverlayBox, touchPoint)) {
                         mIsDraggingBox = true;
                         mGoogleMap.getUiSettings().setScrollGesturesEnabled(Boolean.FALSE);
+                        mLastX = event.getX();
+                        mLastY = event.getY();
                     }
                     break;
 
                 case MotionEvent.ACTION_MOVE:
-                    if (mIsDraggingBox && event.getHistorySize() > 0) {
+                    if (mIsDraggingBox) {
                         LatLng lastTouchPoint = OverlayUtils.convertPointToLatLng(w, h,
-                                event.getHistoricalX(0), h - event.getHistoricalY(0),
-                                mGoogleMap);
+                                mLastX, h - mLastY, mGoogleMap);
 
                         LatLng oldPos = mDraggableOverlayBox.getPosition();
 
@@ -107,6 +111,9 @@ public class SelectableMapFragment extends SupportMapFragment
                                 oldPos.longitude + diffLng));
 
                         mListener.onOverlayDrag(mDraggableOverlayBox.getBounds());
+
+                        mLastX = event.getX();
+                        mLastY = event.getY();
                     }
                     break;
 
