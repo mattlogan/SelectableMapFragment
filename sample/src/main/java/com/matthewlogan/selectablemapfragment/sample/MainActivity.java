@@ -10,6 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.matthewlogan.selectablemapfragment.library.OnOverlayDragListener;
 import com.matthewlogan.selectablemapfragment.library.SupportSelectableMapFragment;
 
 import java.text.DecimalFormat;
@@ -36,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
         df.setMaximumFractionDigits(4);
 
         mMapFragment = new SupportSelectableMapFragment();
-        mMapFragment.setOnOverlayDragListener(new SupportSelectableMapFragment.OnOverlayDragListener() {
+        mMapFragment.setOnOverlayDragListener(new OnOverlayDragListener() {
             @Override
             public void onOverlayDrag(LatLngBounds latLngBounds) {
                 coordinatesTextView.setText(
