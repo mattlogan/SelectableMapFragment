@@ -10,7 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.matthewlogan.selectablemapfragment.library.view.SelectableMapFragment;
+import com.matthewlogan.selectablemapfragment.library.view.SupportSelectableMapFragment;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -21,7 +21,7 @@ public class MainActivity extends ActionBarActivity {
     private static LatLng sStartLocation = new LatLng(37.7833, -122.4167);
     private static float sStartZoom = 10.f;
 
-    private SelectableMapFragment mMapFragment;
+    private SupportSelectableMapFragment mMapFragment;
     private GoogleMap mGoogleMap;
 
     @Override
@@ -35,16 +35,16 @@ public class MainActivity extends ActionBarActivity {
         df.setMinimumFractionDigits(4);
         df.setMaximumFractionDigits(4);
 
-        mMapFragment = new SelectableMapFragment();
-        mMapFragment.setOnOverlayDragListener(new SelectableMapFragment.OnOverlayDragListener() {
+        mMapFragment = new SupportSelectableMapFragment();
+        mMapFragment.setOnOverlayDragListener(new SupportSelectableMapFragment.OnOverlayDragListener() {
             @Override
             public void onOverlayDrag(LatLngBounds latLngBounds) {
                 coordinatesTextView.setText(
                         "SW: (" + df.format(latLngBounds.southwest.latitude) + " N, "
-                        + df.format(latLngBounds.southwest.longitude) + " E)"
-                        + "\n"
-                        + "NE: (" + df.format(latLngBounds.northeast.latitude) + " N, "
-                        + df.format(latLngBounds.northeast.longitude) + " E)"
+                                + df.format(latLngBounds.southwest.longitude) + " E)"
+                                + "\n"
+                                + "NE: (" + df.format(latLngBounds.northeast.latitude) + " N, "
+                                + df.format(latLngBounds.northeast.longitude) + " E)"
                 );
             }
         });

@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
@@ -20,7 +20,7 @@ import com.matthewlogan.selectablemapfragment.library.util.OverlayUtils;
  * Created by matthewlogan on 5/20/14.
  */
 
-public class SelectableMapFragment extends MapFragment
+public class SupportSelectableMapFragment extends SupportMapFragment
         implements TouchableMapWrapper.OnMapTouchListener, GoogleMap.OnMapClickListener {
 
     public static final float sBaseOverlaySquareSize = 10000;
@@ -42,7 +42,7 @@ public class SelectableMapFragment extends MapFragment
         public void onOverlayDrag(LatLngBounds latLngBounds);
     }
 
-    public SelectableMapFragment() {
+    public SupportSelectableMapFragment() {
 
     }
 
