@@ -18,8 +18,6 @@ import java.text.NumberFormat;
 
 public class MainActivity extends ActionBarActivity {
 
-    private static final String TAG = "SelectableMapFragment-sample";
-
     private static LatLng sStartLocation = new LatLng(37.7833, -122.4167);
     private static float sStartZoom = 10.f;
 
