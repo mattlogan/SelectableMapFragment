@@ -1,4 +1,4 @@
-package com.matthewlogan.selectablemapfragment.library.util;
+package com.matthewlogan.selectablemapfragment.library;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,7 +10,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.matthewlogan.selectablemapfragment.library.R;
 
 /**
  * Created by matthewlogan on 5/20/14.

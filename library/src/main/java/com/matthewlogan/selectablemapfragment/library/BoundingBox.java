@@ -1,4 +1,4 @@
-package com.matthewlogan.selectablemapfragment.library.util;
+package com.matthewlogan.selectablemapfragment.library;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;

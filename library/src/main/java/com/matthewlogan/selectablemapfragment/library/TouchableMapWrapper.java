@@ -1,4 +1,4 @@
-package com.matthewlogan.selectablemapfragment.library.view;
+package com.matthewlogan.selectablemapfragment.library;
 
 import android.content.Context;
 import android.view.MotionEvent;

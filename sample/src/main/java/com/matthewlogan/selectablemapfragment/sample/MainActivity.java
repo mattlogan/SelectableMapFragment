@@ -10,7 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.matthewlogan.selectablemapfragment.library.view.SupportSelectableMapFragment;
+import com.matthewlogan.selectablemapfragment.library.SupportSelectableMapFragment;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
