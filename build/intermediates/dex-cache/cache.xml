@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/Users/matthewlogan/dev/SelectableMapFragment/sample/build/intermediates/pre-dexed/debug/classes-87c4a25d5a10ca3bff55f696d078d5f6858a5179.jar"
+        jar="/Users/matthewlogan/dev/SelectableMapFragment/build/intermediates/exploded-aar/SelectableMapFragment/library/unspecified/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="ceb51c4f75ff366561cf97e7fd8408619cf9ee0c"/>
+    <item
+        dex="/Users/matthewlogan/dev/SelectableMapFragment/sample/build/intermediates/pre-dexed/debug/classes-6333d7647e00d607a61f34ef4b7f472d3112ec0f.jar"
+        jar="/Users/matthewlogan/dev/SelectableMapFragment/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28"/>
+    <item
+        dex="/Users/matthewlogan/dev/SelectableMapFragment/sample/build/intermediates/pre-dexed/debug/support-v4-19.1.0-fe930dc68beb1e566675ce71b270d4091c6c249b.jar"
+        jar="/Applications/Android Studio.app/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+    <item
+        dex="/Users/matthewlogan/dev/SelectableMapFragment/sample/build/intermediates/pre-dexed/debug/classes-429c5d5326a127770c3a75f460d4cabf2b02201d.jar"
+        jar="/Users/matthewlogan/dev/SelectableMapFragment/build/intermediates/exploded-aar/com.google.android.gms/play-services/4.3.23/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="7676c0cb230efa6ac41c47867d372ed5913029d4"/>
+
+</pre-dex-items>

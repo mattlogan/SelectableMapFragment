@@ -1,13 +1,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <Button
+        android:id="@+id/show_selection_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show selection box"/>
 
     <RelativeLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5" />
+        android:layout_weight="5"/>
 
     <TextView
         android:id="@+id/coordinates_text_view"
@@ -19,6 +25,6 @@
         android:padding="10dp"
         android:textColor="@color/coordinates_text_view_text"
         android:textSize="18sp"
-        android:typeface="monospace" />
+        android:typeface="monospace"/>
 
 </LinearLayout>

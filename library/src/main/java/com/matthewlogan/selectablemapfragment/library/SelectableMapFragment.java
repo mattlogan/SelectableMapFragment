@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
@@ -17,7 +18,6 @@ import com.google.android.gms.maps.model.LatLng;
 /**
  * Created by matthewlogan on 5/20/14.
  */
-
 public class SelectableMapFragment extends MapFragment
         implements TouchableMapWrapper.OnMapTouchListener, GoogleMap.OnMapClickListener {
 
@@ -35,10 +35,6 @@ public class SelectableMapFragment extends MapFragment
 
     private float mLastX;
     private float mLastY;
-
-    public SelectableMapFragment() {
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -59,6 +55,7 @@ public class SelectableMapFragment extends MapFragment
             if (mGoogleMap != null) {
                 mGoogleMap.setOnMapClickListener(this);
                 showSelectionBox();
+                hideSelectionBox();
             }
         }
     }
@@ -71,7 +68,7 @@ public class SelectableMapFragment extends MapFragment
     @Override
     public void onMapTouch(MotionEvent event) {
 
-        if (event.getPointerCount() == 1) {
+        if (event.getPointerCount() == 1 && mDraggableOverlayBox != null) {
 
             final int w = getView().getWidth();
             final int h = getView().getHeight();
@@ -135,7 +132,7 @@ public class SelectableMapFragment extends MapFragment
         mListener = listener;
     }
 
-    private void showSelectionBox() {
+    public void showSelectionBox() {
         if (mDraggableOverlayBoxOptions == null) {
             Bitmap bm = OverlayUtils.makeSquareOverlayBitmap(getActivity());
             LatLng startPosition = mGoogleMap.getCameraPosition().target;
@@ -147,5 +144,22 @@ public class SelectableMapFragment extends MapFragment
         }
 
         mDraggableOverlayBox = mGoogleMap.addGroundOverlay(mDraggableOverlayBoxOptions);
+    }
+
+    public void hideSelectionBox() {
+        mDraggableOverlayBox.setVisible(false);
+        mDraggableOverlayBox = null;
+    }
+
+    public void setSelectionBoxVisible(boolean visible) {
+        if (visible) {
+            showSelectionBox();
+        } else {
+            hideSelectionBox();
+        }
+    }
+
+    public boolean isSelectionBoxVisible() {
+        return mDraggableOverlayBox != null;
     }
 }

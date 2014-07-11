@@ -3,6 +3,8 @@ package com.matthewlogan.selectablemapfragment.sample;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -54,6 +56,19 @@ public class MainActivity extends ActionBarActivity {
         fm.beginTransaction()
                 .add(R.id.fragment_container, mMapFragment)
                 .commit();
+
+        final Button selectionBoxButton = (Button) findViewById(R.id.show_selection_button);
+        selectionBoxButton.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) {
+                if (mMapFragment.isSelectionBoxVisible()) {
+                    mMapFragment.setSelectionBoxVisible(false);
+                    selectionBoxButton.setText("Show selection box");
+                } else {
+                    mMapFragment.setSelectionBoxVisible(true);
+                    selectionBoxButton.setText("Hide selection box");
+                }
+            }
+        });
     }
 
     @Override

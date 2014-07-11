@@ -2,12 +2,14 @@ package com.matthewlogan.selectablemapfragment.library;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlay;
@@ -17,7 +19,6 @@ import com.google.android.gms.maps.model.LatLng;
 /**
  * Created by matthewlogan on 5/20/14.
  */
-
 public class SupportSelectableMapFragment extends SupportMapFragment
         implements TouchableMapWrapper.OnMapTouchListener, GoogleMap.OnMapClickListener {
 
@@ -35,10 +36,6 @@ public class SupportSelectableMapFragment extends SupportMapFragment
 
     private float mLastX;
     private float mLastY;
-
-    public SupportSelectableMapFragment() {
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -58,7 +55,6 @@ public class SupportSelectableMapFragment extends SupportMapFragment
             mGoogleMap = getMap();
             if (mGoogleMap != null) {
                 mGoogleMap.setOnMapClickListener(this);
-                showSelectionBox();
             }
         }
     }
@@ -71,7 +67,7 @@ public class SupportSelectableMapFragment extends SupportMapFragment
     @Override
     public void onMapTouch(MotionEvent event) {
 
-        if (event.getPointerCount() == 1) {
+        if (event.getPointerCount() == 1 && mDraggableOverlayBox != null) {
 
             final int w = getView().getWidth();
             final int h = getView().getHeight();
@@ -135,7 +131,7 @@ public class SupportSelectableMapFragment extends SupportMapFragment
         mListener = listener;
     }
 
-    private void showSelectionBox() {
+    public void showSelectionBox() {
         if (mDraggableOverlayBoxOptions == null) {
             Bitmap bm = OverlayUtils.makeSquareOverlayBitmap(getActivity());
             LatLng startPosition = mGoogleMap.getCameraPosition().target;
@@ -147,5 +143,22 @@ public class SupportSelectableMapFragment extends SupportMapFragment
         }
 
         mDraggableOverlayBox = mGoogleMap.addGroundOverlay(mDraggableOverlayBoxOptions);
+    }
+
+    public void hideSelectionBox() {
+        mDraggableOverlayBox.setVisible(false);
+        mDraggableOverlayBox = null;
+    }
+
+    public void setSelectionBoxVisible(boolean visible) {
+        if (visible) {
+            showSelectionBox();
+        } else {
+            hideSelectionBox();
+        }
+    }
+
+    public boolean isSelectionBoxVisible() {
+        return mDraggableOverlayBox != null;
     }
 }
