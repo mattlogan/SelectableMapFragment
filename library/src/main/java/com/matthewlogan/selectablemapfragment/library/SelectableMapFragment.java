@@ -124,8 +124,10 @@ public class SelectableMapFragment extends MapFragment
 
     @Override
     public void onMapClick(LatLng latLng) {
-        mDraggableOverlayBox.setPosition(latLng);
-        mListener.onOverlayDrag(mDraggableOverlayBox.getBounds());
+        if (mDraggableOverlayBox != null) {
+            mDraggableOverlayBox.setPosition(latLng);
+            mListener.onOverlayDrag(mDraggableOverlayBox.getBounds());
+        }
     }
 
     public void setOnOverlayDragListener(OnOverlayDragListener listener) {
