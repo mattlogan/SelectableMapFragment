@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 /**
  * Created by matthewlogan on 5/20/14.
@@ -54,8 +54,6 @@ public class SelectableMapFragment extends MapFragment
             mGoogleMap = getMap();
             if (mGoogleMap != null) {
                 mGoogleMap.setOnMapClickListener(this);
-                showSelectionBox();
-                hideSelectionBox();
             }
         }
     }
@@ -101,7 +99,9 @@ public class SelectableMapFragment extends MapFragment
                                 oldPos.latitude + diffLat,
                                 oldPos.longitude + diffLng));
 
-                        mListener.onOverlayDrag(mDraggableOverlayBox.getBounds());
+                        if (mListener != null) {
+                            mListener.onOverlayDrag(mDraggableOverlayBox.getBounds());
+                        }
 
                         mLastX = event.getX();
                         mLastY = event.getY();
@@ -126,7 +126,9 @@ public class SelectableMapFragment extends MapFragment
     public void onMapClick(LatLng latLng) {
         if (mDraggableOverlayBox != null) {
             mDraggableOverlayBox.setPosition(latLng);
-            mListener.onOverlayDrag(mDraggableOverlayBox.getBounds());
+            if (mListener != null) {
+                mListener.onOverlayDrag(mDraggableOverlayBox.getBounds());
+            }
         }
     }
 
@@ -146,11 +148,14 @@ public class SelectableMapFragment extends MapFragment
         }
 
         mDraggableOverlayBox = mGoogleMap.addGroundOverlay(mDraggableOverlayBoxOptions);
+        mDraggableOverlayBox.setPosition(mGoogleMap.getCameraPosition().target);
     }
 
     public void hideSelectionBox() {
-        mDraggableOverlayBox.setVisible(false);
-        mDraggableOverlayBox = null;
+        if (mDraggableOverlayBox != null) {
+            mDraggableOverlayBox.setVisible(false);
+            mDraggableOverlayBox = null;
+        }
     }
 
     public void setSelectionBoxVisible(boolean visible) {
@@ -163,5 +168,12 @@ public class SelectableMapFragment extends MapFragment
 
     public boolean isSelectionBoxVisible() {
         return mDraggableOverlayBox != null;
+    }
+
+    public LatLngBounds getSelectionBoxBounds() {
+        if (mDraggableOverlayBox != null) {
+            return mDraggableOverlayBox.getBounds();
+        }
+        return null;
     }
 }
